@@ -1,0 +1,22 @@
+* 수강생 만족도 조사  ( 어플로 진행 )
+
+Git 설치 https://git-scm.com
+
+Git - 툴 프로그램 설치 ( 아래것중 택 1 ) 
+https://gitextensions.github.io
+https://tortoisegit.org/download/
+
+호스팅 사이트 가입
+GitHub ,  https://github.com
+
+- 개인저장소 까지 만들면 됩니다. 
+
+
+2D 시작페이지 만들고 
+StartScene -> GameScene 전환 적용 
+다시 StartScene으로 오는것으로 진행 
+
+GameManager 만들어서 게임을 이제 하나하나 만들어간다. 
+
+
+
