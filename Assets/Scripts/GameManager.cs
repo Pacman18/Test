@@ -1,28 +1,28 @@
+using System;
 using System.Collections;
 using Mono.Cecil;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
-{
+public class GameManager : MonoSingletone<GameManager>
+{   
     
     [SerializeField]
-    private Button _startButton;
-
-    [SerializeField]
-    private Transform _canvasTrasn;
+    private Transform _canvasTrasn; // 씬이 바뀌면 사라짐 
     
     void Start()
     {
-        DontDestroyOnLoad(gameObject);    
-        
-        _startButton.onClick.AddListener(OnClickStartButton);
+        var temp = Instance;
+
+        UIManager.Instance.CreateStartUI();
+
+        //StartCoroutine(TimeCheck());
     }
 
     private void OnClickStartButton()
     {
-        _startButton.gameObject.SetActive(false);       
+        //_startButton.gameObject.SetActive(false);       
 
         Debug.Log("OnClickStartButton");
         // ModeUI 프리팹을 리소스를 로드해서, Instantiate한다. 
@@ -49,7 +49,49 @@ public class GameManager : MonoBehaviour
 
         // 플레이어 생성해주면 됨 
         GameObject resGO = Resources.Load<GameObject>("Prefab/PangPlayer");
-        Instantiate(resGO);
+        GameObject realGO = Instantiate(resGO);
+        realGO.transform.position = new Vector3(0,-2.66f,0);
+
+        // 배경도 로드해야겠다.
+        GameObject bottomRes = Resources.Load<GameObject>("Prefab/Bottom");
+        GameObject bottomGo = Instantiate(bottomRes);
+
+        // 일반 공을 생성해봐야겠다. 
+        GameObject gongRes = Resources.Load<GameObject>("Prefab/Gong");
+        GameObject gongGo = Instantiate(gongRes);
+        gongGo.transform.position = new Vector3(0, 6, 0);
+
+
+        Transform tr = realGO.transform;
+
+        // 게임 UI 로드하는 부분 
+        GameObject scoreUIRes = Resources.Load<GameObject>("Prefab/ScoreUI");
+        GameObject scoreUIGo = Instantiate(scoreUIRes, _canvasTrasn, false);
+        ScoreUI scoreUIComp = scoreUIGo.GetComponent<ScoreUI>();
+    }
+
+    public void CreateEffect(Vector3 pos)
+    {
+        // 일반 공을 생성해봐야겠다. 
+        GameObject gongRes = Resources.Load<GameObject>("Prefab/ExplosionEffect");
+        GameObject gongGo = Instantiate(gongRes);
+        gongGo.transform.position= pos;
+    }
+
+    int index = 0;
+
+    private IEnumerator TimeCheck()
+    {
+        while (true)
+        {
+
+            yield return new WaitForSeconds(1);
+
+
+            index++;
+
+            Debug.Log("index : " + index);
+        }
     }
 
 
