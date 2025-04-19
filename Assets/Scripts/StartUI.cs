@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StartUI : MonoBehaviour
+public class StartUI : UIBase
 {
     private Button _button;
     
@@ -11,26 +11,13 @@ public class StartUI : MonoBehaviour
 
         if (_button != null)
         {
-            _button.onClick.AddListener(OnClickStartButton);
+            _button.onClick.AddListener(GameManager.Instance.OnClickStartButton);
         }        
-    }
-
+    }    
+    
     private void OnClickStartButton()
-    {
-        UIManager.Instance.CreateModeUI();
-
-        Destroy(gameObject);
-        //_button.gameObject.SetActive(false);
-
-        /*Debug.Log("OnClickStartButton");
-        // ModeUI 프리팹을 리소스를 로드해서, Instantiate한다. 
-        GameObject resGO = Resources.Load<GameObject>("Prefab/ModeUI");
-        Debug.Log("resGO : " + resGO);
-
-        GameObject sceanGO = Instantiate(resGO, _canvasTrasn, false);
-        ModeUI uiComp = sceanGO.GetComponent<ModeUI>();
-        uiComp.AddTimeClickEvent(OnClickTimeAttackMode);
-        uiComp.AddStageClickEvent(OnClickStageMode);*/
+    {   
+        Destroy(gameObject);      
     }
 
 }

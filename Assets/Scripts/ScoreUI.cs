@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 
-public class ScoreUI : MonoBehaviour
+public class ScoreUI : UIBase
 {
     TextMeshProUGUI _scoreText;
     

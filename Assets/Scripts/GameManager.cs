@@ -1,9 +1,7 @@
-using System;
+using System.IO;
 using System.Collections;
-using Mono.Cecil;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class GameManager : MonoSingletone<GameManager>
 {   
@@ -15,12 +13,10 @@ public class GameManager : MonoSingletone<GameManager>
     {
         var temp = Instance;
 
-        UIManager.Instance.CreateStartUI();
-
-        //StartCoroutine(TimeCheck());
+        UIManager.Instance.CreateStartUI();        
     }
 
-    private void OnClickStartButton()
+    /*private void OnClickStartButton()
     {
         //_startButton.gameObject.SetActive(false);       
 
@@ -33,14 +29,21 @@ public class GameManager : MonoSingletone<GameManager>
         ModeUI uiComp = sceanGO.GetComponent<ModeUI>();
         uiComp.AddTimeClickEvent(OnClickTimeAttackMode);
         uiComp.AddStageClickEvent(OnClickStageMode);
+    }*/
+
+    // 맨처음 StartUI버튼 눌렸을때 함수 
+    public void OnClickStartButton()
+    {
+        UIManager.Instance.CreateModeUI();
     }
 
-    private void OnClickTimeAttackMode()
+    public void OnClickTimeAttackMode()
     {
        Debug.Log("OnClickTimeAttackMode");
 
         StartCoroutine(LoadSceneAsync("GameScene"));
     }
+
 
     private IEnumerator LoadSceneAsync(string sceneName)
     {
@@ -64,10 +67,27 @@ public class GameManager : MonoSingletone<GameManager>
 
         Transform tr = realGO.transform;
 
-        // 게임 UI 로드하는 부분 
-        GameObject scoreUIRes = Resources.Load<GameObject>("Prefab/ScoreUI");
-        GameObject scoreUIGo = Instantiate(scoreUIRes, _canvasTrasn, false);
-        ScoreUI scoreUIComp = scoreUIGo.GetComponent<ScoreUI>();
+        UIManager.Instance.CreateScoreUI();        
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            // 파일 경로
+            string path = Application.persistentDataPath + "/playerData.json";
+
+            Debug.Log("path " + path);
+            Human human = new Human();
+            human.number = 10;
+            human.name = "123";
+            string json = JsonUtility.ToJson(human);
+
+            // 파일로 저장
+            File.WriteAllText(path, json);
+
+            Debug.Log(json);
+        }
     }
 
     public void CreateEffect(Vector3 pos)
@@ -76,6 +96,11 @@ public class GameManager : MonoSingletone<GameManager>
         GameObject gongRes = Resources.Load<GameObject>("Prefab/ExplosionEffect");
         GameObject gongGo = Instantiate(gongRes);
         gongGo.transform.position= pos;
+    }
+
+    public void AddScore()
+    {
+        UIManager.Instance.AddScore();
     }
 
     int index = 0;
@@ -94,13 +119,17 @@ public class GameManager : MonoSingletone<GameManager>
         }
     }
 
-
-
-
-
     private void OnClickStageMode()
     {
 
     }
 
+}
+
+
+[System.Serializable]
+public class Human
+{
+    public string name;
+    public int number;
 }

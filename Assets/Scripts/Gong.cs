@@ -113,6 +113,7 @@ public class Gong : MonoBehaviour
         Vector3 center = (transform.position + other.transform.position) * 0.5f;
 
         manager.CreateEffect(center);
+        manager.AddScore();
 
         Destroy(other.gameObject);
         Destroy(gameObject);
