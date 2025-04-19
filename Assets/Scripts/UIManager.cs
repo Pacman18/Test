@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using static Unity.Burst.Intrinsics.X86.Avx;
 using System.Xml.Linq;
+using UnityEngine.UI;
 
 public class UIBase : MonoBehaviour
 {
@@ -17,22 +18,40 @@ public class UIManager : MonoSingletone<UIManager>
     private Transform _canvasTrasn;
 
     private Dictionary<string, UIBase> _container =  new Dictionary<string, UIBase>();
-    
+
     // 컨테이너에 저장해서 관리하면 된다. 
+
+    private string _uiPath = "Prefab/";
 
     private void Awake()
     {
-        _canvasTrasn = transform;
+        if(_canvasTrasn == null)
+        {
+            gameObject.AddComponent<Canvas>();
+            gameObject.AddComponent<CanvasScaler>();
+            _canvasTrasn = gameObject.transform;
+        }    
+        else
+            _canvasTrasn = transform;
     }
+
+    public void CreateUI<T>() where T : UIBase
+    {   
+        GameObject resGO = Resources.Load<GameObject>(_uiPath + typeof(T).ToString());
+        GameObject sceanGO = Instantiate(resGO, _canvasTrasn, false);
+        T comp = sceanGO.GetComponent<T>();
+        _container.Add(typeof(T).ToString(), comp);
+    }
+
 
     public void CreateStartUI()
     {
         // ModeUI 프리팹을 리소스를 로드해서, Instantiate한다. 
-        GameObject resGO = Resources.Load<GameObject>("Prefab/StartUI");
+        /*GameObject resGO = Resources.Load<GameObject>("Prefab/StartUI");
         GameObject sceanGO = Instantiate(resGO, _canvasTrasn, false);
         StartUI comp = sceanGO.GetComponent<StartUI>();
 
-        _container.Add(typeof(StartUI).ToString(), comp);
+        _container.Add(typeof(StartUI).ToString(), comp);*/
     }    
 
     //모드 UI만드는 코드를 작성해서 StartUI버튼이 눌렸을때

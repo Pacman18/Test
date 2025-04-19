@@ -23,8 +23,14 @@ public class Tester : MonoBehaviour
     int accIndex;
 
     void Update()
-    {        
-        if(Input.GetKeyDown(KeyCode.A))
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            UIManager.Instance.CreateUI<StartUI>();
+        }
+
+
+        /*if(Input.GetKeyDown(KeyCode.A))
         {
             MyItemData data = new MyItemData();
             data.Number = accIndex++;
@@ -40,9 +46,8 @@ public class Tester : MonoBehaviour
             _scroll.InsertData(data3);
             _scroll.InsertData(data4);
 
+            }*/
         }
-    }
-
 }
 
 
