@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7598845227892262404}
   - component: {fileID: 5781587078797513625}
   - component: {fileID: 2892679971955654397}
-  - component: {fileID: 781837151509201687}
+  - component: {fileID: 2657884463455357274}
   m_Layer: 5
   m_Name: StartButton
   m_TagString: Untagged
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 0.92980057, b: 0.3160377, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_PressedColor: {r: 1, g: 0, b: 0, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &781837151509201687
+--- !u!114 &2657884463455357274
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,10 +131,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4409126204505093343}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd49b5ab4d26c7c4e99e03730386f808, type: 3}
+  m_Script: {fileID: 11500000, guid: c7c8bacff34defc478ebcf2d028a1c7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  method: 22
+  method: 13
   style: 2
   animationCurve:
     serializedVersion: 2
@@ -162,7 +162,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   ignoreTimeScale: 1
   delay: 0
-  duration: 1
+  duration: 0.5
   steeperCurves: 0
   tweenGroup: 0
   onFinished:
@@ -171,7 +171,7 @@ MonoBehaviour:
   eventReceiver: {fileID: 0}
   callWhenFinished: 
   from: {x: 1, y: 1, z: 1}
-  to: {x: 2, y: 2, z: 2}
+  to: {x: 1.2, y: 1.2, z: 1}
 --- !u!1 &7536669211529303030
 GameObject:
   m_ObjectHideFlags: 0
