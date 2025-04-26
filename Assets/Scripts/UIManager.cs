@@ -15,6 +15,7 @@ public class UIBase : MonoBehaviour
 
 public class UIManager : MonoSingletone<UIManager>
 {
+    [SerializeField]
     private Transform _canvasTrasn;
 
     private Dictionary<string, UIBase> _container =  new Dictionary<string, UIBase>();
@@ -47,11 +48,11 @@ public class UIManager : MonoSingletone<UIManager>
     public void CreateStartUI()
     {
         // ModeUI 프리팹을 리소스를 로드해서, Instantiate한다. 
-        /*GameObject resGO = Resources.Load<GameObject>("Prefab/StartUI");
+        GameObject resGO = Resources.Load<GameObject>("Prefab/StartUI");
         GameObject sceanGO = Instantiate(resGO, _canvasTrasn, false);
         StartUI comp = sceanGO.GetComponent<StartUI>();
 
-        _container.Add(typeof(StartUI).ToString(), comp);*/
+        _container.Add(typeof(StartUI).ToString(), comp);
     }    
 
     //모드 UI만드는 코드를 작성해서 StartUI버튼이 눌렸을때
